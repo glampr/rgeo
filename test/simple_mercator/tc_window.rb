@@ -85,6 +85,14 @@ module RGeo
           window2_ = Geographic::ProjectedWindow.for_corners(@factory.point(160, -30), @factory.point(-170, 30))
           assert_close_enough(@factory.point(175, 0), window2_.center_point)
         end
+        
+        
+        def test_random_point
+          window1_ = Geographic::ProjectedWindow.for_corners(@factory.point(-170, 30), @factory.point(-160, 40))
+          20.times { assert(window1_.contains_point?(window1_.random_point)) }
+          window2_ = Geographic::ProjectedWindow.for_corners(@factory.point(170, 30), @factory.point(-170, 40))
+          20.times { assert(window2_.contains_point?(window2_.random_point)) }
+        end
 
 
         def test_crosses_seam
